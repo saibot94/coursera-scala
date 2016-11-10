@@ -6,16 +6,16 @@ class Rational(x: Int, y: Int) {
   private val g = gcd(x,y)
   val numer = x / g
   val denom = y / g
-  def add(r: Rational) =
-    new Rational(r.numer * denom + numer * r.denom, r.denom * denom)
-  def sub(r: Rational) =
-    add(r.neg)
-  def neg: Rational =
+  def +(that: Rational) =
+    new Rational(that.numer * denom + numer * that.denom, that.denom * denom)
+  def -(that: Rational) =
+    this + (-that)
+  def unary_- : Rational =
     new Rational(-numer, denom)
   override def toString =
     numer + "/" + denom
-  def less(that: Rational): Boolean = this.numer * that.denom < that.numer * this.denom
-  def max(that: Rational) = if(this.less(that)) this else that
+  def < (that: Rational): Boolean = this.numer * that.denom < that.numer * this.denom
+  def max(that: Rational) = if(this < that) this else that
 }
 val x = new Rational(1, 3)
 val y = new Rational(5,7)
@@ -23,10 +23,12 @@ val z = new Rational(3, 2)
 x.numer
 x.denom
 
-x.add(y)
-z.max(x)
-x.sub(y).sub(z)
-y.add(y)
+x + y
+z max x
+x - y  - z
+y + y
 
 val strange = new Rational(1)
-strange.add(strange)
+strange + strange
+
+-strange
