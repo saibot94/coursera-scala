@@ -42,6 +42,6 @@ object test {
 val myList = List(1,2)
 myList.prepend(new Cons(4, Nil))
 
-def f(xs: List) = xs prepend Nil
+def f[T](xs: List[T]) = xs prepend Nil
 
 
