@@ -25,8 +25,13 @@ class Poly(terms0: Map[Int, Double]) {
     exp -> (terms(exp) + coeff)
   }
 
-  def +(other: Poly) = new Poly(terms ++
-    (other.terms map adjust))
+  def +(other: Poly) = new Poly(
+    (other.terms foldLeft terms)(addTerm)
+  )
+  def addTerm(other: Map[Int,Double], term: (Int,Double)): Map[Int,Double] ={
+    val (exp,coeff) = term
+    other + (exp -> (terms(exp) + coeff))
+  }
 
   override def toString: String =
     (for ((exp, coef) <- terms.toList.sorted.reverse)
