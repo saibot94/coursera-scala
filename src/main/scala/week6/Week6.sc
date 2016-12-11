@@ -77,6 +77,13 @@ def queens(n:Int):Set[List[Int]] = {
 
   placeQueens(n)
 }
-queens(6)
+def show(q: List[Int]) = {
+  val lines =
+    for(l <- q.reverse)
+      yield Vector.fill(q.length)("* ").updated(l, "X ").mkString
+  "\n" + (lines mkString "\n")
+}
+
+(queens(4)  map show) mkString "\n"
 
 
