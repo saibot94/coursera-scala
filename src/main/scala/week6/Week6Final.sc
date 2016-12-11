@@ -32,5 +32,5 @@ def encode(number: String): Set[List[String]] =
     } yield word :: rest
   }.toSet
 
-val res = encode("7225247386")
-res contains List("Scala", "is", "fun")
+val res = encode("7225247386") map (sentence =>
+  sentence mkString " ") mkString "\n"
